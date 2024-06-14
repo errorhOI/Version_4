@@ -287,12 +287,13 @@ canvas{
 
 @media (max-width: 768px) {
     .image-click img, .image-click-2 img {
-        width: 90vw; /* 90% of the viewport width */
+        width: 71.5%;
         height: auto;
-        padding-top: 5vh; /* 5% of the viewport height */
-        padding-left: 5vw; /* 5% of the viewport width */
+        padding-top: 20px;
+        padding-left: 20px;
     }
 }
+
 
 
 .switch-button {
