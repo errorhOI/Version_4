@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panolens</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="three.min.js"></script>
+    <script src="panolens.min.js"></script>
+    <script src="main.js"></script>
+    <style>
+        .container-1, .container-2, .container-3, .container-4 {
+            display: none;
+        }
+    </style>
+    <script>
+        let viewer;
+        let panorama;
+        let panorama2;
+
+        function switchToPanorama(panoramaNumber) {
+            if (panoramaNumber === 1) {
+                viewer.setPanorama(panorama2);
+            } else if (panoramaNumber === 2) {
+                viewer.setPanorama(panorama);
+            }
+            toggleSubMenu();
+        }
+
+        function closeOverlay(id) {
+            var overlay = document.getElementById(id);
+            overlay.style.display = 'none';
+        }
+
+        function exit(containerId) {
+            var overlay = document.getElementById(containerId);
+            overlay.style.display = 'none';
+        }
+
+        function switchImage() {
+            var img1 = document.getElementById('image-click-1');
+            var img2 = document.getElementById('image-click-2');
+            if (img1.style.display === 'block') {
+                img1.style.display = 'none';
+                img2.style.display = 'block';
+            } else {
+                img1.style.display = 'block';
+                img2.style.display = 'none';
+            }
+        }
+
+        function toggleSubMenu() {
+            var subMenuWrap = document.querySelector('.sub-menu-wrap');
+            if (subMenuWrap.style.display === 'block') {
+                subMenuWrap.style.display = 'none';
+            } else {
+                subMenuWrap.style.display = 'block';
+            }
+        }
+
+        function buttonopen(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        function buttonclose(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "none";                                                       
+        }
+
+        function enlargeImage(imgId) {
+            var img = document.getElementById(imgId);
+            img.classList.toggle('enlarged-image');
+        }
+    </script>
+</head>
+<body onload="loaddoc()">
+    <div class="header">
+        <nav>
+            <img src="images/logo.png" class="logo" alt="Logo" onclick="toggleSubMenu()">
+            <div class="sub-menu-wrap">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img src="images/logo.png" alt="User Image">
+                        <h2 style="color: rgb(255, 255, 255);">Raffles 3D Tour</h2>
+                    </div>
+                    <a href="#" class="sub-menu-link" onclick="switchToPanorama(2)">
+                        <p>Lounge</p>
+                        <span></span>
+                    </a>
+                    <a href="#" class="sub-menu-link" onclick="switchToPanorama(1)">
+                        <p>Dining Area</p>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="particle-container">
+        <div class="particle1"></div>
+        <div class="particle2"></div>
+        <div class="particle3"></div>
+        <div class="particle4"></div>
+
+
+    <div class="tour">
+        <div class="container">
+            <div class="tour__head">
+                <h2>3D TOUR</h2>
+            </div>
+            <div class="image-container"></div>
+        </div>
+        <div id="container1" class="container-1">
+            <div class="container-content-1">
+                <span class="close-btn" onclick="closeOverlay('container1')">×</span>
+                <div class="image-content-1">
+                    <img id="static-image-1" src="" alt="static-image1">
+                    <button class="content-btn"  onclick="buttonopen('info-1')">Click Me</button>
+                    <div id="info-1" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="buttonclose('info-1')">×</span>
+                            <h1>Coffee Table Set</h1>
+                            <p>A place to relax and chill</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="container2" class="container-2">
+            <div class="container-content-2">
+                <span class="close-btn-2" onclick="closeOverlay('container2')">×</span>
+                <div class="image-content-2">
+                    <img id="static-image-2" src="" alt="static-image2">
+                    <div class="text-content">
+                        <h1>Vending Machine</h1>
+                        <p>A Machine that spits out food, not free though....</p>
+                    </div>
+                    <div class="hover-effect" style="top: 27%; left: 73%;">
+                        <div class="icon"></div>
+                        <div class="image-hover-vending">
+                            <img src="images/image7.jpg" id="vending-image" alt="image-hover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="container3" class="container-3">
+            <div class="container-content-3">
+                <span class="close-btn" onclick="closeOverlay('container3')">×</span>
+                <div class="image-content-3">
+                    <img id="static-image-3" src="" alt="static-image3" onclick="enlargeImage('static-image-3')">
+                    <button class="content-btn" onclick="buttonopen('info2')">Click Me</button>
+                    <div id="info2" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="buttonclose('info2')">×</span>
+                            <h1>Sink Area</h1>
+                            <p>A place where food is being generated by someone..... i wonder who</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="container4" class="container-4">
+            <div class="container-content-4">
+                <img id="static-image-4" src="" alt="static-image4">
+                <div class="text-content" style="margin-left:50px;">
+                    <h1>Ceiling light</h1>
+                    <p>Able to Lighten up dark places</p>
+                </div>
+                <div class="image-click" id="image-click-1">
+                    <img src="images/image8.jpg" alt="Image Click">
+                </div>
+                <div class="image-click" id="image-click-2">
+                    <img src="images/image9.jpg" alt="Image Click">
+                </div>
+                <div class="button-position">
+                    <button class="switch-button" onclick="switchImage()">Click Me</button>
+                    <button class="switch-button" onclick="exit('container4')">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
