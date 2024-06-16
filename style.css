@@ -228,14 +228,15 @@ canvas {
 }
 .image-click img,
 .image-click-2 img {
-    width: 75.7%;
+    width: 560px;
+    height: 420px;
     padding-top: 20px;
     padding-left: 20px;
 }
 @media (max-width: 768px) {
     .image-click img,
     .image-click-2 img {
-        width: 68.5%;
+        width: 71.5%;
         height: auto;
         padding-top: 20px;
         padding-left: 20px;
